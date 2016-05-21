@@ -1,0 +1,15 @@
+.col-xs-4.col-xs-offset-4
+  = form_for [:admin, @equipment] do |f|
+    - if @equipment.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(@equipment.errors.count, "error")
+          prohibited this equipment from being saved:
+        %ul
+          - @equipment.errors.full_messages.each do |message|
+            %li= message
+    = f.text_field :title
+    = f.text_area :body
+    = f.file_field :pic
+    .actions
+      = f.submit

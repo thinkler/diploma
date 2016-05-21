@@ -8,7 +8,37 @@
 </head>
 <body>
 
-<%= yield %>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <%= link_to "Медико-санитарный цех", root_path, class: 'navbar-brand' %>
+    </div>
+    <% if current_admin %>
+      <%= render partial: 'headers/admin_header' %>
+    <% elsif current_patient %>
+
+    <% elsif current_doctor %>
+
+    <% else %>
+      <div class="nav navbar-nav navbar-right">
+        <li>
+          <%= link_to "Войти", new_admin_session_path %>
+        </li>
+      </div>
+    <% end %>
+  </div>
+</nav>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<div class="content">
+  <%= yield %>
+</div>
+<div class="sidebar">
+  <%= yield :sidebar %>
+</div>
+
 
 </body>
 </html>

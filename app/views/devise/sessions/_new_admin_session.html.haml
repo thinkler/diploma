@@ -1,0 +1,12 @@
+= form_for(Admin, as: :admin, url: session_path(:admin)) do |f|
+  .field
+    = f.label :email
+    %br/
+    = f.email_field :email, autofocus: true, class: 'form-control'
+  .field
+    = f.label :password
+    %br/
+    = f.password_field :password, autocomplete: "off", class: 'form-control'
+  %br
+    .actions
+      = f.submit "Log in", class: 'btn btn-default'

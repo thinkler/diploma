@@ -1,0 +1,15 @@
+.col-xs-4.col-xs-offset-4
+  = form_for [:admin, @news] do |f|
+    - if @news.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(@news.errors.count, "error")
+          prohibited this news from being saved:
+        %ul
+          - @news.errors.full_messages.each do |message|
+            %li= message
+    = f.text_field :title
+    = f.text_area  :body
+    = f.file_field :pic
+    .actions
+      = f.submit

@@ -1,0 +1,7 @@
+.nav.navbar-nav
+  %li= link_to "Оборудование", admin_equipment_index_path
+  %li= link_to "Новости", admin_news_index_path
+.nav.navbar-nav.navbar-right
+  %li
+    %a= current_admin.email
+  %li= link_to "Выйти", destroy_admin_session_path, method: :delete

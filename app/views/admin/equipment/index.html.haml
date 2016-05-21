@@ -1,0 +1,14 @@
+.col-xs-4.col-xs-offset-3
+  = link_to 'New equip', new_admin_equipment_path, class: 'btn btn-primary'
+
+  - @equipment.each do |eq|
+    %ul
+      %li
+        = eq.title
+        = eq.body
+        = image_tag eq.pic.url(:thumb)
+        = link_to "X", admin_equipment_path(eq), method: :delete, class: 'btn btn-danger'
+        = link_to "Edit", edit_admin_equipment_path(eq), class: 'btn btn-success'
+
+  .pagination
+    = paginate @equipment
