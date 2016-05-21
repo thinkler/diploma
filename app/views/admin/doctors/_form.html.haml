@@ -1,5 +1,5 @@
 .col-xs-4.col-xs-offset-4
-  = form_for [:admin, @doctor] do |f|
+  = bootstrap_form_for [:admin, @doctor] do |f|
     - if @doctor.errors.any?
       #error_explanation
         %h2
@@ -8,8 +8,18 @@
         %ul
           - @doctor.errors.full_messages.each do |message|
             %li= message
-    = f.text_field :title
-    = f.text_area :body
-    = f.file_field :pic
+
+    = f.text_field :email
+    = f.text_field :first_name
+    = f.text_field :last_name
+    = f.text_area  :about
+    = f.password_field :password
+
+    = f.label :specialities
+    = text_field_tag :specialities, specs_to_string(@doctor.specialities), class: 'form-control'
+
+    = f.file_field :photo
+    = f.file_field :diploma
+
     .actions
       = f.submit

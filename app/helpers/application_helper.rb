@@ -6,5 +6,11 @@ module ApplicationHelper
     end
   end
 
+  def to_string(arr)
+    arr.each_with_object("") do |item, memo|
+      memo.concat("#{item.title} ")
+    end
+  end
+
 
 end

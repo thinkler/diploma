@@ -1,4 +1,4 @@
-class Admin::DoctorController < ApplicationController
+class Admin::DoctorsController < ApplicationController
   before_action :set_doctor, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -9,7 +9,7 @@ class Admin::DoctorController < ApplicationController
   end
 
   def new
-    @doctor = doctor.new
+    @doctor = Doctor.new
   end
 
   def edit
@@ -18,7 +18,8 @@ class Admin::DoctorController < ApplicationController
   def create
     @doctor = Doctor.new(doctor_params)
     if @doctor.save
-       redirect_to admin_doctor_index_path, notice: 'doctor was successfully created.'
+      add_specialities(params[:specialities], @doctor)
+      redirect_to admin_doctors_path, notice: 'doctor was successfully created.'
     else
       render :new
     end
@@ -26,7 +27,8 @@ class Admin::DoctorController < ApplicationController
 
   def update
     if @doctor.update(doctor_params)
-      redirect_to admin_doctor_index_path, notice: 'doctor was successfully updated.'
+      add_specialities(params[:specialities], @doctor)
+      redirect_to admin_doctors_path, notice: 'doctor was successfully updated.'
     else
       render :edit
     end
@@ -34,7 +36,7 @@ class Admin::DoctorController < ApplicationController
 
   def destroy
     @doctor.destroy
-    redirect_to admin_doctor_index_path, notice: 'doctor was successfully destroyed.'
+    redirect_to admin_doctors_path, notice: 'doctor was successfully destroyed.'
   end
 
   private
@@ -44,7 +46,16 @@ class Admin::DoctorController < ApplicationController
   end
 
   def doctor_params
-    params.require(:doctor).permit(:first_name, :last_name, :password, :photo, :diploma, :specialities, )
+    params.require(:doctor).permit(:email, :first_name, :last_name, :password, :photo, :diploma, :about)
+  end
+
+  def add_specialities(specs, doctor)
+    doctor.specialities.delete_all
+    specs.split(" ").each do |sp|
+      speciality = Speciality.find_or_initialize_by(title: sp)
+      speciality.doctors << doctor
+      speciality.save
+    end
   end
 
 end

@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160521132551) do
+ActiveRecord::Schema.define(version: 20160521213618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accesories", force: :cascade do |t|
+    t.integer  "doctor_id"
+    t.integer  "speciality_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "accesories", ["doctor_id"], name: "index_accesories_on_doctor_id", using: :btree
+  add_index "accesories", ["speciality_id"], name: "index_accesories_on_speciality_id", using: :btree
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -34,6 +44,13 @@ ActiveRecord::Schema.define(version: 20160521132551) do
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
+  create_table "connects", force: :cascade do |t|
+    t.integer  "problem_id"
+    t.integer  "patient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "doctors", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -47,6 +64,17 @@ ActiveRecord::Schema.define(version: 20160521132551) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.text     "about"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.string   "diploma_file_name"
+    t.string   "diploma_content_type"
+    t.integer  "diploma_file_size"
+    t.datetime "diploma_updated_at"
   end
 
   add_index "doctors", ["email"], name: "index_doctors_on_email", unique: true, using: :btree
@@ -75,22 +103,29 @@ ActiveRecord::Schema.define(version: 20160521132551) do
   end
 
   create_table "patients", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "personal_numner"
+    t.string   "work_position"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
-  add_index "patients", ["email"], name: "index_patients_on_email", unique: true, using: :btree
-  add_index "patients", ["reset_password_token"], name: "index_patients_on_reset_password_token", unique: true, using: :btree
+  create_table "problems", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "specialities", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

@@ -1,5 +1,5 @@
 .col-xs-4.col-xs-offset-4
-  = form_for [:admin, @equipment] do |f|
+  = bootstrap_form_for [:admin, @equipment] do |f|
     - if @equipment.errors.any?
       #error_explanation
         %h2
