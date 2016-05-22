@@ -16,7 +16,9 @@
     </div>
     <% if current_admin %>
       <%= render partial: 'headers/admin_header' %>
-    <% elsif current_patient %>
+    <% elsif current_doctor %>
+      <%= render partial: 'headers/doctor_header' %>
+    <% elsif current_patient%>
       <%= render partial: 'headers/default_header' %>
       <%= render partial: 'headers/patient_header' %>
     <% else %>

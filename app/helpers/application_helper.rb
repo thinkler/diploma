@@ -12,5 +12,9 @@ module ApplicationHelper
     end
   end
 
+  def current_patient
+    session[:patient]
+  end
+
 
 end

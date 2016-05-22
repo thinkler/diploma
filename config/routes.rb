@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   devise_for :admins
-  devise_for :patients
+  devise_for :doctors
 
   resources :equipment
-  resources :doctors
 
   root 'index#home'
 
