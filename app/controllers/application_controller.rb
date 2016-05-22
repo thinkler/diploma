@@ -11,4 +11,9 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
+  def current_patient
+    session[:patient]
+  end
+
 end

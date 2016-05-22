@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :admins
+  devise_for :patients
 
   resources :equipment
   resources :doctors
@@ -14,4 +15,6 @@ Rails.application.routes.draw do
   end
 
   get '/index/role_selection/:role', to: 'index#role_selection'
+  post '/patients', to: 'patients#sign_in', as: 'patient_sign_in'
+  delete '/patients', to: 'patients#sign_out', as: 'patient_sign_out'
 end

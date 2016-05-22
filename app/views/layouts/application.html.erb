@@ -16,8 +16,10 @@
     </div>
     <% if current_admin %>
       <%= render partial: 'headers/admin_header' %>
-    <% else %>
+    <% elsif current_patient %>
       <%= render partial: 'headers/default_header' %>
+      <%= render partial: 'headers/patient_header' %>
+    <% else %>
       <div class="nav navbar-nav navbar-right">
         <li>
           <%= link_to "Войти", new_admin_session_path %>
