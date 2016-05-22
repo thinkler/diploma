@@ -1,0 +1,15 @@
+.col-xs-2.col-xs-offset-2
+  .thumbnail
+    = search_form_for @q do |f|
+      = f.label :email_cont
+      = f.search_field :email_cont, class: 'form-control'
+
+      = f.label :speciality
+      = f.search_field :specialities_title_cont, class: 'form-control'
+
+      = f.submit class: 'btn btn-success'
+
+    = link_to 'Reset', doctors_path, class: 'btn btn-default'
+
+#doctors.col-xs-5
+  = render partial: 'doctors'

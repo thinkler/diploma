@@ -1,6 +1,8 @@
 class IndexController < ApplicationController
 
   def home
+    @news = News.all.page(params[:page]).per(5)
+    @info = Info.last
   end
 
   def role_selection

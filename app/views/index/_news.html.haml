@@ -1,0 +1,8 @@
+.col-xs-4
+  - @news.each do |n|
+    = n.title
+    = n.body
+    %br/
+
+  .pagination
+    = paginate @news

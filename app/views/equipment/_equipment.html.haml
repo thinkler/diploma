@@ -1,0 +1,12 @@
+.col-xs-offset-2
+  .pagination
+    = paginate @equipment
+
+%ul
+  - @equipment.each do |eq|
+    %li
+      = eq.title
+      = image_tag eq.pic.url(:thumb)
+      = link_to "Записаться", {}, class: 'btn btn-success'
+      = link_to "Подробнее", equipment_path(eq), class: 'btn btn-default'
+

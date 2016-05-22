@@ -16,7 +16,7 @@
     = f.password_field :password
 
     = f.label :specialities
-    = text_field_tag :specialities, specs_to_string(@doctor.specialities), class: 'form-control'
+    = text_field_tag :specialities, to_string(@doctor.specialities), class: 'form-control'
 
     = f.file_field :photo
     = f.file_field :diploma

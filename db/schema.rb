@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160521213618) do
+ActiveRecord::Schema.define(version: 20160522155043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20160521213618) do
     t.string   "diploma_content_type"
     t.integer  "diploma_file_size"
     t.datetime "diploma_updated_at"
+    t.integer  "equipment_id"
   end
 
   add_index "doctors", ["email"], name: "index_doctors_on_email", unique: true, using: :btree
@@ -89,6 +90,12 @@ ActiveRecord::Schema.define(version: 20160521213618) do
     t.string   "pic_content_type"
     t.integer  "pic_file_size"
     t.datetime "pic_updated_at"
+  end
+
+  create_table "infos", force: :cascade do |t|
+    t.text     "about"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "news", force: :cascade do |t|

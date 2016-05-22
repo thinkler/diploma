@@ -1,0 +1,12 @@
+.col-xs-offset-2
+  .pagination
+    = paginate @doctors
+
+%ul
+  - @doctors.each do |doc|
+    %li
+      = doc.email
+      = doc.last_name
+      = image_tag doc.photo.url(:thumb)
+      = link_to "Записаться", {}, class: 'btn btn-success'
+      = link_to "Подробнее", doctor_path(doc), class: 'btn btn-default'

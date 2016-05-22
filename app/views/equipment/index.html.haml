@@ -1,0 +1,12 @@
+.col-xs-2.col-xs-offset-2
+  .thumbnail
+    = search_form_for @q do |f|
+      = f.label :title_cont
+      = f.search_field :title_cont, class: 'form-control'
+
+      = f.submit class: 'btn btn-success'
+
+    = link_to 'Reset', equipment_index_path, class: 'btn btn-default'
+
+#doctors.col-xs-5
+  = render partial: 'equipment'

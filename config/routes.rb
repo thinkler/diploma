@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   devise_for :admins
-  devise_for :doctors
-  devise_for :patients
+
   resources :equipment
+  resources :doctors
+
   root 'index#home'
 
   namespace :admin do

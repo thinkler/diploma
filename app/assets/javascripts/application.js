@@ -15,3 +15,8 @@
 //= require_tree .
 //= require jquery
 //= require bootstrap-sprockets
+
+$(function(){
+  $('.pagination a').attr('data-remote', 'true');
+})
+
