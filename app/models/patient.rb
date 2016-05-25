@@ -7,4 +7,5 @@ class Patient < ActiveRecord::Base
   has_many :connects
   has_many :problems, through: :connects
   has_many :notes
+  has_many :tickets
 end

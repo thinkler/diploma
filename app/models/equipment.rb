@@ -4,4 +4,5 @@ class Equipment < ActiveRecord::Base
 
   has_many :doctors
   has_many :notes
+  has_many :tickets
 end

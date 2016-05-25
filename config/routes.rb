@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   namespace :patient do
     resources :notes
+    resources :tickets
+    get '/doc_search', to: 'tickets#doc_search'
   end
 
   get 'patient/personal_info', to: 'patients#personal_info', as: 'patient_info'
