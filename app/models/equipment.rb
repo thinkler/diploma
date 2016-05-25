@@ -3,4 +3,5 @@ class Equipment < ActiveRecord::Base
   validates_attachment_content_type :pic, content_type: /\Aimage\/.*\Z/
 
   has_many :doctors
+  has_many :notes
 end

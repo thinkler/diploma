@@ -1,0 +1,13 @@
+.container.col-xs-6
+  .col-xs-offset-2
+    .pagination
+      = paginate @notes
+
+  %ul
+    - @notes.each do |n|
+      %li
+        = n.title
+        = n.body
+        = link_to "Show", patient_note_path(n)
+
+

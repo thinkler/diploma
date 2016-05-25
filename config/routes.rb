@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :doctors
 
   resources :equipment
+  resources :doctors
 
   root 'index#home'
 
@@ -12,6 +13,12 @@ Rails.application.routes.draw do
     resources :news
     resources :patients
   end
+
+  namespace :patient do
+    resources :notes
+  end
+
+  get 'patient/personal_info', to: 'patients#personal_info', as: 'patient_info'
 
   get '/index/role_selection/:role', to: 'index#role_selection'
   post '/patients', to: 'patients#sign_in', as: 'patient_sign_in'

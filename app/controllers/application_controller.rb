@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_patient
-    session[:patient]
+    Patient.find(session[:patient]["id"])
   end
 
 end

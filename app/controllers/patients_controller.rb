@@ -11,6 +11,10 @@ class PatientsController < ApplicationController
     redirect_to root_path, notice: "Вы успешно вышли"
   end
 
+  def personal_info
+    @patient = current_patient
+  end
+
   private
 
   def permit_params

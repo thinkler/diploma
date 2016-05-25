@@ -16,6 +16,8 @@ Info.create(about: 'Some about')
                 about: "About#{i}")
 
   Equipment.create(title: "Eq#{i}", body: "BodyEq#{i}")
+  News.create(title: "News#{i}", body: "BodyN#{i}")
+  Note.create(title: "Note#{i}", body: "BodyNote#{i}", doctor_id: Doctor.last.id, equipment_id: Equipment.last.id, patient_id: Patient.first.id)
 end
 
 puts 'Seed done'
