@@ -1,7 +1,20 @@
-= text_field_tag 'search', nil, id: 'doc-search'
-
 %br
 
-- @doctors.each do |doc|
-  = doc.first_name
-  %br
+.col-xs-3
+  = text_field_tag 'search', nil, id: 'doc-search'
+  %br/
+  %br/
+  .doctor.btn.btn-danger Reset
+  #doctors= render partial: 'doctors'
+
+.col-xs-3
+  = text_field_tag 'search', nil, id: 'eq-search'
+  %br/
+  %br/
+  #equipment= render partial: 'equipment'
+
+.col-xs-3
+  = text_field_tag 'search', nil, id: 'spec-search'
+  %br/
+  %br/
+  #specialities= render partial: 'specialities'

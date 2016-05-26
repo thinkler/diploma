@@ -1,0 +1,3 @@
+.list-group
+  - @equipment.each do |eq|
+    %a.list-group-item{id: "#{eq.id}"}= eq.title

@@ -1,0 +1,3 @@
+.list-group
+  - @doctors.each do |doc|
+    %a.list-group-item{id: "#{doc.id}"}= doc.first_name

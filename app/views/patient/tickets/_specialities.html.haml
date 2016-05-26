@@ -1,0 +1,3 @@
+.list-group
+  - @specialities.each do |spec|
+    %a.list-group-item{id: "#{spec.id}"}= spec.title

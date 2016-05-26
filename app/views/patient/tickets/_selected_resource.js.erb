@@ -1,0 +1,2 @@
+selector = "#" + "<%= @klass.pluralize %>"
+$(selector).html('<%= escape_javascript render partial: "selected_#{@klass}" %>')
