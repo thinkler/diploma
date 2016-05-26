@@ -19,14 +19,3 @@ $ ->
       q = 'all'
     $.get('/patient/search/specialities/' + q)
   )
-
-  $('.doctor.btn.btn-danger').click(() ->
-    q = 'all'
-    $('#doc-search').val('')
-    $.get('/patient/search/doctors/' + q)
-  )
-
-$(document).on('click', '#doctors .list-group-item', () ->
-  id = $(this).attr('id')
-  $.get('/patient/select/Doctor/' + id)
-)

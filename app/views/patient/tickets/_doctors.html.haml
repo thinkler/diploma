@@ -1,3 +1,3 @@
 .list-group
   - @doctors.each do |doc|
-    %a.list-group-item{id: "#{doc.id}"}= doc.first_name
+    = link_to "#{doc.first_name}", url_make_helper(@url, 'doc_id', doc.id), class: "list-group-item"

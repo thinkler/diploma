@@ -1,20 +1,36 @@
 %br
 
+
 .col-xs-3
+  %h4 Doctor
   = text_field_tag 'search', nil, id: 'doc-search'
   %br/
   %br/
-  .doctor.btn.btn-danger Reset
-  #doctors= render partial: 'doctors'
+  - if @doctor || @doctors.length == 1
+    - doc = @doctor || @doctors.last
+    %h1= doc.first_name
+  - else
+    #doctors= render partial: 'doctors'
 
 .col-xs-3
+  %h4 Equipment
   = text_field_tag 'search', nil, id: 'eq-search'
   %br/
   %br/
-  #equipment= render partial: 'equipment'
+  - if @equip || @equipment.length == 1
+    - eq = @equip || @equipment.last
+    %h1= eq.title
+  - else
+    #equipment= render partial: 'equipment'
 
 .col-xs-3
+  %h4 Speciality
   = text_field_tag 'search', nil, id: 'spec-search'
   %br/
   %br/
-  #specialities= render partial: 'specialities'
+  - if @spec || @specialities.length == 1
+    - equip = @spec || @specialities.last
+    %h1= equip.title
+  - else
+    #specialities= render partial: 'specialities'
+

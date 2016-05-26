@@ -16,5 +16,13 @@ module ApplicationHelper
     session[:patient]
   end
 
+  def url_make_helper(url, type, id)
+    if url.include? '?'
+      return url + "&#{type}=#{id}"
+    else
+      return url + "?#{type}=#{id}"
+    end
+    byebug
+  end
 
 end
