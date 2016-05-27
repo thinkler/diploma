@@ -21,6 +21,9 @@ gem 'guard-livereload'
 gem 'paperclip'
 gem 'kaminari'
 gem 'ransack'
+gem "chartkick"
+gem 'groupdate'
+gem 'faker'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def current_patient
-    session[:patient]
+    Patient.find(session[:patient]["id"]) if session[:patient]
   end
 
   def url_make_helper(url, type, id)
@@ -23,6 +23,10 @@ module ApplicationHelper
       return url + "?#{type}=#{id}"
     end
     byebug
+  end
+
+  def free_time(times)
+    times.select { |k, v| v == "false" }
   end
 
 end

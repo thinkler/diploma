@@ -1,8 +1,12 @@
 .col-xs-4
-  - @news.each do |n|
-    = n.title
-    = n.body
-    %br/
+  %h1 Новости
 
-  .pagination
-    = paginate @news
+  - @news.each do |n|
+    .thumbnail
+      = image_tag n.pic, size: "160x100"
+      .caption
+        %h3= n.title
+        = n.body
+
+  .pagination.pages
+    = paginate @news, window: 2

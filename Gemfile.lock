@@ -48,6 +48,7 @@ GEM
     bootstrap_form (2.3.0)
     builder (3.2.2)
     byebug (9.0.4)
+    chartkick (1.5.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.8)
@@ -74,10 +75,14 @@ GEM
     erubis (2.7.0)
     eventmachine (1.2.0.1)
     execjs (2.7.0)
+    faker (1.6.1)
+      i18n (~> 0.5)
     ffi (1.9.10)
     formatador (0.2.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    groupdate (2.5.3)
+      activesupport (>= 3)
     guard (2.14.0)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -233,8 +238,11 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
   bootstrap_form
   byebug
+  chartkick
   coffee-rails (~> 4.1.0)
   devise
+  faker
+  groupdate
   guard-livereload
   haml
   jbuilder (~> 2.0)

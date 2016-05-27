@@ -3,14 +3,14 @@
 
 .col-xs-offset-3.col-xs-6
 
-  = form_for @day, as: 'day', url: doctor_day_create_path(@day.id) do |f|
+  = form_tag doctor_day_create_path(@day.id), method: :patch do
 
-    = f.label "Date", "Дата"
-    = f.text_field "date", id: 'datepicker', class: 'form-control'
+    = label_tag "Date", "Дата"
+    = date_field_tag "date", "", class: 'form-control'
 
     %br/
 
-    = f.label "Times", "Время приемов"
+    = label "Times", "Время приемов"
 
     %br/
 
@@ -24,10 +24,10 @@
     %br/
     %br/
 
-    = f.label "Note", "Примечание"
+    = label_tag "Note", "Примечание"
 
-    = f.text_area "notes", class: 'form-control'
+    = text_area_tag "notes", "", class: 'form-control'
 
     %br/
 
-    = f.submit "Создать", class: 'btn btn-success'
+    = submit_tag "Создать", class: 'btn btn-success'

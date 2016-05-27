@@ -5,9 +5,22 @@
   <title>NewDiploma</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "https://www.google.com/jsapi" %>
   <%= csrf_meta_tags %>
+  <link href='https://fonts.googleapis.com/css?family=Philosopher&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 </head>
 <body>
+
+<% if notice %>
+  <div id="notice_wrapper">
+    <p class="notice"><%= notice %></p>
+  </div>
+<% elsif alert %>
+  <div id="notice_wrapper">
+    <p class="alert"><%= alert %></p>
+  </div>
+<% end %>
+
 
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -22,17 +35,13 @@
       <%= render partial: 'headers/default_header' %>
       <%= render partial: 'headers/patient_header' %>
     <% else %>
-      <div class="nav navbar-nav navbar-right">
-        <li>
-          <%= link_to "Войти", new_admin_session_path %>
-        </li>
+      <div class="nav navbar-nav">
+        <%= link_to "Войти в систему", '/admins/sign_in', class: 'btn btn-primary btn-lg log-but' %>
       </div>
     <% end %>
   </div>
 </nav>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
 
 <div class="content">
   <%= yield %>

@@ -1,0 +1,5 @@
+.col-xs-6.container
+  .list-group
+    - free_time(@day.times).each do |k, v|
+      = link_to "#{k}", patient_ticket_path(id: 0, doc: @doc.id, equip: @equip.id, spec: @spec.id, time: k, day: @day.id), method: :post, class: "ticket-timet list-group-item"
+      %br/

@@ -1,7 +1,7 @@
 class IndexController < ApplicationController
 
   def home
-    @news = News.all.page(params[:page]).per(5)
+    @news = News.all.page(params[:page]).per(3)
     @info = Info.last
   end
 

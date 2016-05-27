@@ -15,6 +15,10 @@ class PatientsController < ApplicationController
     @patient = current_patient
   end
 
+  def charts
+
+  end
+
   private
 
   def permit_params

@@ -6,9 +6,10 @@ class Doctor::DaysController < ApplicationController
 
   def update
     @day = Day.find(params[:id])
+    @day.date = params[:date]
     @day.doctor_id = current_doctor.id
+    @day.notes = params[:notes]
     @day.save
-    @day.update(permit_params)
     redirect_to doctor_days_path
   end
 
@@ -39,7 +40,7 @@ class Doctor::DaysController < ApplicationController
   private
 
   def permit_params
-    params.require(:day).permit(:date, :note)
+    params.require(:day).permit(:date, :notes)
   end
 
   def default_times

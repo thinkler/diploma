@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     resources :notes
     resources :tickets
     get '/search/:klass/:q', to: 'tickets#search'
+    get '/find_day/:doc_id/:equip_id/:spec_id/:date', to: 'tickets#find_day'
+    post '/tickets/:id', to: 'tickets#create'
   end
 
   namespace :doctor do
@@ -29,6 +31,7 @@ Rails.application.routes.draw do
   end
 
   get 'patient/personal_info', to: 'patients#personal_info', as: 'patient_info'
+  get 'patient/charts', to: 'patients#charts', as: 'patient_charts'
 
   get '/index/role_selection/:role', to: 'index#role_selection'
   post '/patients', to: 'patients#sign_in', as: 'patient_sign_in'

@@ -6,12 +6,46 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body {
+  font-family: 'Philosopher', sans-serif;
+}
+
+.notice {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  width: 100%;
+  background: rgba(0, 61, 153, 0.8);
+}
+
+.alert {
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  width: 100%;
+  background: rgba(252, 52, 97, 0.9);
+}
+
+.log-but {
+  margin-left: 300%;
+}
+
+.pages {
+  font-size: 10pt
+}
 
 .center {
   text-align: center;
 }
 
-.notice {
-  background-color: blue
+.about {
+  font-size: 14pt;
 }
-

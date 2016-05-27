@@ -8,4 +8,5 @@ class Patient < ActiveRecord::Base
   has_many :problems, through: :connects
   has_many :notes
   has_many :tickets
+  has_many :specialities, through: :tickets
 end

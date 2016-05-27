@@ -3,7 +3,7 @@
 
 .col-xs-3
   %h4 Doctor
-  = text_field_tag 'search', nil, id: 'doc-search'
+  .col-xs-6= text_field_tag 'search', nil, id: 'doc-search', class: 'form-control'
   %br/
   %br/
   - if @doctor || @doctors.length == 1
@@ -14,7 +14,7 @@
 
 .col-xs-3
   %h4 Equipment
-  = text_field_tag 'search', nil, id: 'eq-search'
+  .col-xs-6= text_field_tag 'search', nil, id: 'eq-search', class: 'form-control'
   %br/
   %br/
   - if @equip || @equipment.length == 1
@@ -25,12 +25,18 @@
 
 .col-xs-3
   %h4 Speciality
-  = text_field_tag 'search', nil, id: 'spec-search'
+  .col-xs-6= text_field_tag 'search', nil, id: 'spec-search', class: 'form-control'
   %br/
   %br/
   - if @spec || @specialities.length == 1
-    - equip = @spec || @specialities.last
-    %h1= equip.title
+    - spec = @spec || @specialities.last
+    %h1= spec.title
   - else
     #specialities= render partial: 'specialities'
 
+.col-xs-6
+  - if doc
+    .col-xs-3
+      = label_tag "Выберите день"
+      = date_field_tag "date", "", id: 'datepicker-ticket', class: 'form-control', doc_id: "#{doc.id}", equip_id: "#{eq.id}", spec_id: "#{spec.id}"
+    #times

@@ -20,6 +20,32 @@ class Patient::TicketsController < ApplicationController
     end
   end
 
+  def find_day
+    @doc = Doctor.find(params[:doc_id]) if params[:doc_id]
+    @spec = Speciality.find(params[:spec_id]) if params[:spec_id]
+    @equip = Equipment.find(params[:equip_id]) if params[:equip_id]
+    @day = @doc.days.find_by(date: params[:date]) unless params[:date] == 'null'
+    byebug
+    respond_to do |format|
+      format.js { render partial: 'day_result' } if @day
+      format.js { render nothing: true }
+    end
+  end
+
+  def create
+    day = Day.find(params[:day])
+    day.times[params[:time]] = true
+    day.save
+    Ticket.create(patient_id: current_patient.id, equipment_id: params[:equip],
+                  doctor_id: params[:doc], speciality_id: params[:spec],
+                  time: params[:time])
+    redirect_to patient_tickets_path
+  end
+
+  def index
+    @tickets = Ticket.all
+  end
+
   private
 
   def doctors

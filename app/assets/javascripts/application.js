@@ -16,8 +16,23 @@
 //= require_tree .
 //= require jquery
 //= require bootstrap-sprockets
+//= require chartkick
 
 $(function(){
   $('.pagination a').attr('data-remote', 'true');
-})
+});
+
+$(document).ready(function(){
+  setTimeout(function(){
+    $(".notice").fadeOut('slow', function(){
+      $(this).remove();
+    });
+  }, 2000);
+
+  setTimeout(function(){
+    $(".alert").fadeOut('slow', function(){
+      $(this).remove();
+    });
+  }, 3500);
+});
 
