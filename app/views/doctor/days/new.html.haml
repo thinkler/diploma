@@ -1,0 +1,33 @@
+%h1.center{id: "#{@day.id}"} New day
+
+
+.col-xs-offset-3.col-xs-6
+
+  = form_for @day, as: 'day', url: doctor_day_create_path(@day.id) do |f|
+
+    = f.label "Date", "Дата"
+    = f.text_field "date", id: 'datepicker', class: 'form-control'
+
+    %br/
+
+    = f.label "Times", "Время приемов"
+
+    %br/
+
+    #times
+      = render partial: 'times'
+
+    #new-time-btn.btn.btn-default Добавить время
+    .col-xs-3= text_field "NewTime", "", class: 'form-control', id: 'new-time'
+
+
+    %br/
+    %br/
+
+    = f.label "Note", "Примечание"
+
+    = f.text_area "notes", class: 'form-control'
+
+    %br/
+
+    = f.submit "Создать", class: 'btn btn-success'

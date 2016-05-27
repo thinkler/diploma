@@ -1,0 +1,11 @@
+.col-xs-12
+  = link_to 'Будущие', doctor_days_path
+  = link_to 'Прошлые', doctor_days_path(past: 1)
+
+
+.col-xs-12
+  =link_to "New day", new_doctor_day_path
+
+  - @days.each do |d|
+    = d.date
+    %br/

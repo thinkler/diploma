@@ -18,7 +18,14 @@ Rails.application.routes.draw do
     resources :notes
     resources :tickets
     get '/search/:klass/:q', to: 'tickets#search'
-    get '/select/:klass/:id', to: 'tickets#select_resource'
+  end
+
+  namespace :doctor do
+    resources :days
+    resources :doctors
+    get '/personal_info', to: 'doctors#personal_info', as: 'info'
+    get '/days/change_time/:type/:id/:time', to: 'days#change_time'
+    patch '/days/update/:id', to: 'days#update', as: 'day_create'
   end
 
   get 'patient/personal_info', to: 'patients#personal_info', as: 'patient_info'
