@@ -36,6 +36,7 @@ Ut luctus lacinia urna, vitae imperdiet nisl ultricies ac. Aliquam dolor arcu, l
 
 Info.create(about: lond_text)
 news_pic = File.open(File.join(Rails.root, 'public', 'news.jpg'))
+equip_pic = File.open(File.join(Rails.root, 'public', 'equip.jpg'))
 
 20.times do |i|
   spec = Speciality.create(title: "spec#{i}")
@@ -44,9 +45,9 @@ news_pic = File.open(File.join(Rails.root, 'public', 'news.jpg'))
                       first_name: "DocFirst#{i}",
                       last_name: "DocLast#{i}",
                       about: "About#{i}")
-  equip = Equipment.create(title: "Eq#{i}", body: "BodyEq#{i}")
+  equip = Equipment.create(title: "Eq#{i}", body: "BodyEq#{i}", pic: equip_pic)
   News.create(title: "News#{i}", body: short_text, pic: news_pic)
-  Note.create(title: "Note#{i}", body: "BodyNote#{i}", doctor_id: Doctor.last.id, equipment_id: Equipment.last.id, patient_id: Patient.first.id)
+  Note.create(title: "Note#{i}", body: short_text, doctor_id: Doctor.last.id, equipment_id: Equipment.last.id, patient_id: Patient.first.id)
 
   doc.specialities << spec
   equip.doctors << doc

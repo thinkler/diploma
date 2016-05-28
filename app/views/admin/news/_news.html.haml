@@ -1,0 +1,27 @@
+.col-xs-8.col-xs-offset-2
+  = link_to 'New news', new_admin_news_path, class: 'btn btn-primary'
+
+  .col-xs-offset-4
+    .pagination
+      = paginate @news
+
+  %table.table.table-hover
+    %thead
+      %tr
+        %th Название
+        %th Описание
+        %th Изображение
+        %th
+    %tbody
+    - @news.each do |n|
+      %tr
+        %td= n.title
+        %td= truncate(n.body, length: 50)
+        %td= image_tag n.pic.url(:thumb)
+        %td
+          = link_to "X", admin_news_path(n), method: :delete, class: 'btn btn-danger'
+          = link_to "Edit", edit_admin_news_path(n), class: 'btn btn-success'
+
+  .col-xs-offset-4
+    .pagination
+      = paginate @news

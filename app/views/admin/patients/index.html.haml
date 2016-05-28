@@ -1,13 +1,2 @@
-.col-xs-4.col-xs-offset-3
-  = link_to 'New patient', new_admin_patient_path, class: 'btn btn-primary'
-
-  - @patients.each do |p|
-    %ul
-      %li
-        = p.last_name
-        = image_tag p.photo.url(:thumb)
-        = link_to "X", admin_patient_path(p), method: :delete, class: 'btn btn-danger'
-        = link_to "Edit", edit_admin_patient_path(p), class: 'btn btn-success'
-
-  .pagination
-    = paginate @patients
+#patients
+  =render 'patients'

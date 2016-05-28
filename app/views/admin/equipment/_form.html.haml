@@ -10,6 +10,10 @@
             %li= message
     = f.text_field :title
     = f.text_area :body
+
+    = f.label :doctors
+    = text_field_tag :doctors, to_string(@equipment.doctors, true), class: 'form-control'
+
     = f.file_field :pic
     .actions
       = f.submit

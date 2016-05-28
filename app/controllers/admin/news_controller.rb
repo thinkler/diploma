@@ -2,7 +2,7 @@ class Admin::NewsController < ApplicationController
   before_action :set_news, only: [:show, :edit, :update, :destroy]
 
   def index
-    @news = News.all.page(params[:page]).per(10)
+    @news = News.all.order('id DESC').page(params[:page]).per(10)
   end
 
   def show

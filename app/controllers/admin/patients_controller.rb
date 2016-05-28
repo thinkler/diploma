@@ -2,7 +2,7 @@ class Admin::PatientsController < ApplicationController
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
 
   def index
-    @patients = Patient.all.page(params[:page]).per(10)
+    @patients = Patient.all.order('id DESC').page(params[:page]).per(10)
   end
 
   def show
@@ -46,7 +46,7 @@ class Admin::PatientsController < ApplicationController
   end
 
   def patient_params
-    params.require(:patient).permit(:email, :first_name, :last_name, :personal_numner, :photo, :position)
+    params.require(:patient).permit(:email, :first_name, :last_name, :personal_number, :photo, :work_position)
   end
 
   def add_problems(specs, patient)

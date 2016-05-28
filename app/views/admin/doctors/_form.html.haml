@@ -18,6 +18,9 @@
     = f.label :specialities
     = text_field_tag :specialities, to_string(@doctor.specialities), class: 'form-control'
 
+    = f.label :equipment
+    = text_field_tag :equipment, to_string(@doctor.equipments), class: 'form-control'
+
     = f.file_field :photo
     = f.file_field :diploma
 

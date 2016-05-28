@@ -1,14 +1,2 @@
-.col-xs-4.col-xs-offset-3
-  = link_to 'New news', new_admin_news_path, class: 'btn btn-primary'
-
-  - @news.each do |n|
-    %ul
-      %li
-        = n.title
-        = n.body
-        = image_tag n.pic.url(:thumb)
-        = link_to "X", admin_news_path(n), method: :delete, class: 'btn btn-danger'
-        = link_to "Edit", edit_admin_news_path(n), class: 'btn btn-success'
-
-  .pagination
-    = paginate @news
+#news
+  =render partial: 'news'

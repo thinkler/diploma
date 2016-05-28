@@ -1,0 +1,27 @@
+.col-xs-8.col-xs-offset-2
+  = link_to 'New equip', new_admin_equipment_path, class: 'btn btn-primary'
+
+  .col-xs-offset-4
+    .pagination
+      = paginate @equipment
+
+  %table.table.table-hover
+    %thead
+      %tr
+        %th Название
+        %th Описание
+        %th Изображение
+        %th
+    %tbody
+    - @equipment.each do |eq|
+      %tr
+        %td= eq.title
+        %td= truncate(eq.body, length: 50)
+        %td= image_tag eq.pic.url(:thumb)
+        %td
+          = link_to "X", admin_equipment_path(eq), method: :delete, class: 'btn btn-danger'
+          = link_to "Edit", edit_admin_equipment_path(eq), class: 'btn btn-success'
+
+  .col-xs-offset-4
+    .pagination
+      = paginate @equipment

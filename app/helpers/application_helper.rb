@@ -6,9 +6,9 @@ module ApplicationHelper
     end
   end
 
-  def to_string(arr)
+  def to_string(arr, doc = false)
     arr.each_with_object("") do |item, memo|
-      memo.concat("#{item.title} ")
+      doc ? memo.concat("#{item.last_name} ") : memo.concat("#{item.title} ")
     end
   end
 

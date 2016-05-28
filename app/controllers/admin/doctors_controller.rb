@@ -2,7 +2,7 @@ class Admin::DoctorsController < ApplicationController
   before_action :set_doctor, only: [:show, :edit, :update, :destroy]
 
   def index
-    @doctors = Doctor.all.page(params[:page]).per(10)
+    @doctors = Doctor.all.order('id DESC').page(params[:page]).per(10)
   end
 
   def show
@@ -18,7 +18,7 @@ class Admin::DoctorsController < ApplicationController
   def create
     @doctor = Doctor.new(doctor_params)
     if @doctor.save
-      add_specialities(params[:specialities], @doctor)
+      add_relations(params[:specialities], params[:equipment],@doctor)
       redirect_to admin_doctors_path, notice: 'doctor was successfully created.'
     else
       render :new
@@ -27,7 +27,7 @@ class Admin::DoctorsController < ApplicationController
 
   def update
     if @doctor.update(doctor_params)
-      add_specialities(params[:specialities], @doctor)
+      add_relations(params[:specialities], params[:equipment], @doctor)
       redirect_to admin_doctors_path, notice: 'doctor was successfully updated.'
     else
       render :edit
@@ -49,12 +49,19 @@ class Admin::DoctorsController < ApplicationController
     params.require(:doctor).permit(:email, :first_name, :last_name, :password, :photo, :diploma, :about)
   end
 
-  def add_specialities(specs, doctor)
+  def add_relations(specs, equip, doctor)
     doctor.specialities.delete_all
+    doctor.equipments.delete_all
     specs.split(" ").each do |sp|
       speciality = Speciality.find_or_initialize_by(title: sp)
       speciality.doctors << doctor
       speciality.save
+    end
+    equip.split(" ").each do |eq|
+      equipment = Equipment.find_by(title: eq)
+      if equipment
+        doctor.equipments << equipment
+      end
     end
   end
 
