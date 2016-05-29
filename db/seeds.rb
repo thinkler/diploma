@@ -6,9 +6,6 @@ Patient.delete_all
 Speciality.delete_all
 News.delete_all
 
-Admin.create(email: 'admin@admin.com', password: 8888888)
-Patient.create(first_name: '1', last_name: '1', personal_number: 1)
-
 
 lond_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eros nisl, aliquam ut elementum a, volutpat sed ipsum.
 Mauris vel consequat justo, at pellentesque justo. Duis finibus, leo eu pharetra viverra,
@@ -34,20 +31,23 @@ lorem ex egestas quam, non rhoncus dui tortor ac risus. Fusce blandit luctus dia
 Nam tristique volutpat rhoncus. Nulla at erat non justo gravida facilisis. Fusce quis dui nisl.
 Ut luctus lacinia urna, vitae imperdiet nisl ultricies ac. Aliquam dolor arcu, lobortis non turpis non, rhoncus imperdiet mi."
 
-Info.create(about: lond_text)
 news_pic = File.open(File.join(Rails.root, 'public', 'news.jpg'))
 equip_pic = File.open(File.join(Rails.root, 'public', 'equip.jpg'))
+doc_pic = File.open(File.join(Rails.root, 'public', 'doc_pic.jpg'))
+patient_pic = File.open(File.join(Rails.root, 'public', 'patient_pic.png'))
+
+Admin.create(email: 'admin@admin.com', password: 8888888)
+Patient.create(first_name: '1', last_name: '1', personal_number: 1, photo: patient_pic)
+Info.create(about: lond_text)
 
 20.times do |i|
-  spec = Speciality.create(title: "spec#{i}")
-  doc = Doctor.create(email: "doc#{i}@doc.com",
-                      password: 88888888,
-                      first_name: "DocFirst#{i}",
-                      last_name: "DocLast#{i}",
-                      about: "About#{i}")
-  equip = Equipment.create(title: "Eq#{i}", body: "BodyEq#{i}", pic: equip_pic)
+  spec = Speciality.create(title: Faker::Hipster.word)
+  doc = Doctor.create(email: "doc#{i}@doc.com", password: 88888888, first_name: Faker::Name.first_name,
+                      last_name: Faker::Name.last_name, about: short_text, photo: doc_pic)
+  equip = Equipment.create(title: Faker::Hipster.word, body: short_text, pic: equip_pic)
   News.create(title: "News#{i}", body: short_text, pic: news_pic)
-  Note.create(title: "Note#{i}", body: short_text, doctor_id: Doctor.last.id, equipment_id: Equipment.last.id, patient_id: Patient.first.id)
+  Note.create(title: "Note#{i}", body: short_text, doctor_id: Doctor.last.id, equipment_id: Equipment.last.id,
+              patient_id: Patient.first.id, speciality_id: spec.id)
 
   doc.specialities << spec
   equip.doctors << doc

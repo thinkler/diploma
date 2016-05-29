@@ -1,12 +1,31 @@
-.col-xs-offset-2
+.col-xs-offset-3
   .pagination
     = paginate @doctors
 
-%ul
-  - @doctors.each do |doc|
-    %li
-      = doc.email
-      = doc.last_name
-      = image_tag doc.photo.url(:thumb)
-      = link_to "Записаться", {}, class: 'btn btn-success'
-      = link_to "Подробнее", doctor_path(doc), class: 'btn btn-default'
+- @doctors.each do |doc|
+  .thumbnail.container.col-xs-12
+    .caption
+      = image_tag doc.photo.url, size: "170x200", class: 'thumb-pic'
+      %h2.center
+        = "#{doc.last_name} #{doc.first_name}"
+        = link_to "Записаться", new_patient_ticket_path(doc_id: doc.id), class: 'btn btn-default'
+      %p.item-body= doc.about
+      .col-xs-3
+        .panel.panel-default
+          .panel-heading Специальности:
+          .panel-body= to_string(doc.specialities)
+      .col-xs-3
+        .panel.panel-default
+          .panel-heading Оборудование:
+          .panel-body
+            - doc.equipments.each do |eq|
+              = link_to eq.title, equipment_index_path(q: {title_eq: eq.title})
+      .col-xs-2
+        .panel.panel-default
+          .panel-heading Диплом:
+          .panel-body
+
+
+.col-xs-offset-3
+  .pagination
+    = paginate @doctors

@@ -4,7 +4,7 @@
 .col-xs-offset-4= pie_chart current_patient.tickets.group(:time).count
 
 %h1.center Частые специальности
-.col-xs-offset-2= bar_chart current_patient.specialities.group(:title).count
+.col-xs-offset-4= bar_chart current_patient.specialities.group(:title).count
 
 %h1.center Частота посещений
-.col-xs-offset-2= line_chart current_patient.tickets.group_by_day(:created_at).count
+.col-xs-offset-4= line_chart current_patient.tickets.group_by_day(:created_at).count

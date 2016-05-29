@@ -1,12 +1,21 @@
-.col-xs-offset-2
+.col-xs-offset-3
   .pagination
     = paginate @equipment
 
-%ul
-  - @equipment.each do |eq|
-    %li
-      = eq.title
-      = image_tag eq.pic.url(:thumb)
-      = link_to "Записаться", {}, class: 'btn btn-success'
-      = link_to "Подробнее", equipment_path(eq), class: 'btn btn-default'
+- @equipment.each do |eq|
+  .thumbnail
+    .caption
+      = image_tag eq.pic.url, size: "300x200", class: 'thumb-pic'
+      %h2.center
+        = eq.title
+        = link_to "Записаться", new_patient_ticket_path(equip_id: eq.id), class: 'btn btn-default'
+      %p.item-body= eq.body
+      .clear
+        %h3 Операторы:
+        - eq.doctors.each do |d|
+          = link_to "#{d.last_name} ", doctors_path(q: {last_name_eq: d.last_name})
 
+
+.col-xs-offset-3
+  .pagination
+    = paginate @equipment

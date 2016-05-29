@@ -1,7 +1,7 @@
 class Patient::NotesController < ApplicationController
 
   def index
-    @notes = current_patient.notes.page(params[:page]).per(10)
+    @notes = current_patient.notes.page(params[:page]).per(5)
   end
 
   def show

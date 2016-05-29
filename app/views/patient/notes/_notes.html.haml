@@ -1,13 +1,37 @@
-.container.col-xs-6
-  .col-xs-offset-2
-    .pagination
-      = paginate @notes
+.col-xs-offset-3
+  .pagination
+    = paginate @notes
 
-  %ul
-    - @notes.each do |n|
-      %li
+- @notes.each do |n|
+  .thumbnail.container.col-xs-12
+    .caption
+      %h2.center
         = n.title
+      %p
         = n.body
-        = link_to "Show", patient_note_path(n)
+      .col-xs-2
+        Доктор:
+        = link_to "#{n.doctor.last_name} ", doctors_path(q: {last_name_eq: n.doctor.last_name})
+
+      .col-xs-2
+        Специальность:
+        = "#{n.speciality.title} "
+
+      - if n.equipment
+        .col-xs-2
+          Оборудование:
+          = link_to "#{n.equipment.title} ", equipment_index_path(q: {last_name_eq: n.doctor.last_name})
+
+      - unless n.doc.url.include? "miss"
+        .col-xs-2
+          Прикрепленый файл:
+          = link_to "Файл", n.doc.url
+
+      .col-xs-2
+        Дата добавления:
+        = n.created_at.strftime("%d.%m.%y")
 
 
+.col-xs-offset-3
+  .pagination
+    = paginate @notes

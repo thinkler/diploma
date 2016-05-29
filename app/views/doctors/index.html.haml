@@ -1,15 +1,19 @@
 .col-xs-2.col-xs-offset-2
-  .thumbnail
+  .thumbnail.search-field
+    %h3.center Поиск доктора
     = search_form_for @q do |f|
-      = f.label :email_cont
-      = f.search_field :email_cont, class: 'form-control'
+      = f.label "Фамилия"
+      = f.search_field :last_name_cont, class: 'form-control'
 
-      = f.label :speciality
+      = f.label "Специальность"
       = f.search_field :specialities_title_cont, class: 'form-control'
 
-      = f.submit class: 'btn btn-success'
+      = f.label "Оборудование"
+      = f.search_field :equipments_title_cont, class: 'form-control'
 
-    = link_to 'Reset', doctors_path, class: 'btn btn-default'
+      = f.submit "Поиск", class: 'btn btn-success'
+
+    = link_to 'Сбросить', doctors_path, class: 'btn btn-default'
 
 #doctors.col-xs-5
   = render partial: 'doctors'

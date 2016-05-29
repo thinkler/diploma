@@ -5,4 +5,5 @@ class Note < ActiveRecord::Base
   belongs_to :patient
   belongs_to :doctor
   belongs_to :equipment
+  belongs_to :speciality
 end

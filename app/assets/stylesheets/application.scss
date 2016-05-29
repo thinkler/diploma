@@ -10,6 +10,34 @@ body {
   font-family: 'Philosopher', sans-serif;
 }
 
+.times {
+  margin-top: 10px;
+}
+
+.patient-nav {
+  position: fixed;
+}
+
+.operators {
+  font-size: 20px;
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+
+.thumb-pic {
+  float: left;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.search-field {
+  margin-top: 120px;
+}
+
 .notice {
   position: fixed;
   z-index: 99;

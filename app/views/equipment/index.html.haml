@@ -1,12 +1,13 @@
 .col-xs-2.col-xs-offset-2
-  .thumbnail
+  .thumbnail.search-field
+    %h3.center Поиск оборудования
     = search_form_for @q do |f|
-      = f.label :title_cont
+      = f.label "Поиск"
       = f.search_field :title_cont, class: 'form-control'
 
-      = f.submit class: 'btn btn-success'
+      = f.submit "Найти", class: 'btn btn-success'
 
-    = link_to 'Reset', equipment_index_path, class: 'btn btn-default'
+    = link_to 'Сбросить', equipment_index_path, class: 'btn btn-default'
 
 #equipment.col-xs-5
   = render partial: 'equipment'

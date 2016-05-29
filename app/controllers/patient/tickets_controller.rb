@@ -25,7 +25,6 @@ class Patient::TicketsController < ApplicationController
     @spec = Speciality.find(params[:spec_id]) if params[:spec_id]
     @equip = Equipment.find(params[:equip_id]) if params[:equip_id]
     @day = @doc.days.find_by(date: params[:date]) unless params[:date] == 'null'
-    byebug
     respond_to do |format|
       format.js { render partial: 'day_result' } if @day
       format.js { render nothing: true }
@@ -38,12 +37,19 @@ class Patient::TicketsController < ApplicationController
     day.save
     Ticket.create(patient_id: current_patient.id, equipment_id: params[:equip],
                   doctor_id: params[:doc], speciality_id: params[:spec],
-                  time: params[:time])
+                  time: params[:time], date: day.date)
     redirect_to patient_tickets_path
   end
 
   def index
-    @tickets = Ticket.all
+    @tickets = Ticket.time_ticket(current_patient, params[:time]).page(params[:page]).per(20)
+  end
+
+  def destroy
+    ticket = Ticket.find(params[:id])
+    Day.free_day(ticket.date, ticket.time)
+    ticket.destroy
+    redirect_to patient_tickets_path
   end
 
   private

@@ -1,5 +1,20 @@
 = render partial: 'patient/patient_navigation'
 
-%h1= @patient.first_name
+.col-xs-4
 
-= debug @patient
+.col-xs-2
+  = image_tag @patient.photo.url, size: "290x300"
+.col-xs-4
+  %h3
+    Имя:
+    = @patient.first_name
+  %h3
+    Фамилия:
+    = @patient.last_name
+  %h3
+    Должность:
+    = @patient.work_position
+
+
+Добавать больше инфо?
+
