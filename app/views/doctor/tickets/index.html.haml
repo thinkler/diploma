@@ -21,10 +21,13 @@
           - if t.equipment
             %br/
             Оборудование:
-            = link_to t.equipment.title, equipment_index_path(q: {title_eq: t.equipment.title})
+            = t.equipment.title
           %br/
           Специальность:
-          = link_to t.speciality.title, doctors_path(q: {specialities_title_eq: t.speciality.title})
+          = t.speciality.title
+          %br/
+          = link_to "Отменить", "", class: 'btn btn-default'
+          = link_to "Перенести", "", class: 'btn btn-default'
 
 
   .col-xs-offset-3
