@@ -23,7 +23,7 @@ class Patient::TicketsController < ApplicationController
   def find_day
     @doc = Doctor.find(params[:doc_id]) if params[:doc_id]
     @spec = Speciality.find(params[:spec_id]) if params[:spec_id]
-    @equip = Equipment.find(params[:equip_id]) if params[:equip_id]
+    @equip = Equipment.find(params[:equip_id]) unless params[:equip_id] == "null"
     @day = @doc.days.find_by(date: params[:date]) unless params[:date] == 'null'
     respond_to do |format|
       format.js { render partial: 'day_result' } if @day

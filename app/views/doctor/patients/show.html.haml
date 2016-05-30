@@ -1,0 +1,18 @@
+.col-xs-2.col-xs-offset-2
+  .thumbnail
+    %h3.center= "#{@patient.last_name} #{@patient.first_name}"
+    = image_tag @patient.photo.url, size: "100x100"
+    %br/
+    %br/
+    %b Должность:
+    = @patient.work_position
+    %br/
+    %b Проблемы:
+    = to_string(@patient.problems)
+
+.col-xs-2
+  =link_to "Новая запись", doctor_new_note_path(@patient.id), class: 'btn btn-default'
+
+
+#notes.col-xs-7
+  = render partial: 'patient/notes/notes'

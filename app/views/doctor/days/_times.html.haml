@@ -1,4 +1,4 @@
-- @day.times.each do |k, v|
+- @times.each do |k, v|
   .time.thumbnail.col-xs-2
     = k
-    .btn.btn-sm{id: k} x
+    .btn.btn-sm{id: k, day_id: @day.id} x

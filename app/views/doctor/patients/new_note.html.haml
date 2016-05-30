@@ -1,0 +1,13 @@
+.col-xs-2.col-xs-offset-2
+  .thumbnail
+    %h3.center= "#{@patient.last_name} #{@patient.first_name}"
+    = image_tag @patient.photo.url, size: "100x100"
+    %br/
+    %br/
+    %b Должность:
+    = @patient.work_position
+    %br/
+    %b Проблемы:
+    = to_string(@patient.problems)
+
+= render partial: 'note_form'

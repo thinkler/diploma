@@ -1,1 +1,3 @@
-$('#times').html("<%=  j render 'times' %>")
+selector = "#times." + "<%= @day.id %>"
+console.log(selector)
+$(selector).html("<%=  j render 'times' %>")

@@ -5,9 +5,6 @@ class Admin::DoctorsController < ApplicationController
     @doctors = Doctor.all.order('id DESC').page(params[:page]).per(10)
   end
 
-  def show
-  end
-
   def new
     @doctor = Doctor.new
   end

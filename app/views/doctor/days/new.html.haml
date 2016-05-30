@@ -14,11 +14,13 @@
 
     %br/
 
-    #times
+    - @times = @day.times
+
+    #times{class: @day.id}
       = render partial: 'times'
 
     #new-time-btn.btn.btn-default Добавить время
-    .col-xs-3= text_field "NewTime", "", class: 'form-control', id: 'new-time'
+    .col-xs-3= time_field "NewTime", "", class: 'form-control', id: 'new-time'
 
 
     %br/

@@ -1,0 +1,19 @@
+.col-xs-offset-3
+  .pagination
+    = paginate @patients
+
+%table.table.table-hover
+  %tr
+    %th Инициалы
+    %th Проблемы
+    %th Фото
+    %th
+  - @patients.each do |p|
+    %tr
+      %td= "#{p.last_name} #{p.first_name}"
+      %td= to_string(p.problems)
+      %td= image_tag p.photo.url, size: '100x100'
+      %td= link_to "Подробнее", doctor_patient_path(p), class: 'btn btn-default'
+.col-xs-offset-3
+  .pagination
+    = paginate @patients

@@ -1,0 +1,20 @@
+.col-xs-4
+  = bootstrap_form_for @note, as: :note, url: doctor_create_note_path(@patient.id) do |f|
+
+    = f.text_field :title
+    = f.text_area  :body
+
+    - unless current_doctor.specialities.length == 1
+      = f.select :speciality_id
+    - else
+      = f.hidden_field :speciality_id, value: current_doctor.specialities.first.id
+
+    - unless current_doctor.specialities.length == 1 || current_doctor.specialities.length.empty?
+      = f.select :equipment_id
+    - else
+      = f.hidden_field :equipment_id, value: current_doctor.equipments.first.id
+
+    = f.file_field :doc
+
+    .actions
+      = f.submit

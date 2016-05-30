@@ -25,9 +25,13 @@ Rails.application.routes.draw do
   namespace :doctor do
     resources :days
     resources :doctors
+    resources :patients
+    resources :tickets
     get '/personal_info', to: 'doctors#personal_info', as: 'info'
     get '/days/change_time/:type/:id/:time', to: 'days#change_time'
     patch '/days/update/:id', to: 'days#update', as: 'day_create'
+    get '/patient/:id/notes/new', to: 'patients#new_note', as: 'new_note'
+    post '/patient/:id/notes/create', to: 'patients#create_note', as: 'create_note'
   end
 
   get 'patient/personal_info', to: 'patients#personal_info', as: 'patient_info'

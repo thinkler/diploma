@@ -1,4 +1,5 @@
 
 .col-xs-12.container.times
   - free_time(@day.times).each do |k, v|
-    = link_to "#{k}", patient_ticket_path(id: 0, doc: @doc.id, equip: @equip.id, spec: @spec.id, time: k, day: @day.id), method: :post, class: "thumbnail col-xs-2"
+    - equip_id = @equip ? @equip.id : ""
+    = link_to "#{k}", patient_ticket_path(id: 0, doc: @doc.id, equip: equip_id, spec: @spec.id, time: k, day: @day.id), method: :post, class: "thumbnail col-xs-2"

@@ -1,0 +1,32 @@
+.container
+  %h1.center Посещения
+
+  .col-xs-2.well.well-sm
+    =link_to "Прошлые", doctor_tickets_path(time: 'past')
+    |
+    =link_to "Будущие", doctor_tickets_path
+
+  .col-xs-12
+    - @tickets.each do |t|
+      .col-xs-3
+        .thumbnail
+          Время:
+          = t.time
+          %br/
+          Дата:
+          = t.date.strftime("%d.%m.%y") if t.date
+          %br/
+          Пациент:
+          = link_to t.doctor.first_name + " " + t.doctor.last_name, doctors_path(q: {last_name_eq: t.doctor.last_name})
+          - if t.equipment
+            %br/
+            Оборудование:
+            = link_to t.equipment.title, equipment_index_path(q: {title_eq: t.equipment.title})
+          %br/
+          Специальность:
+          = link_to t.speciality.title, doctors_path(q: {specialities_title_eq: t.speciality.title})
+
+
+  .col-xs-offset-3
+    .pagination
+      = paginate @tickets

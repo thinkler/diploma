@@ -42,13 +42,17 @@ Info.create(about: lond_text)
 
 20.times do |i|
   spec = Speciality.create(title: Faker::Hipster.word)
-  doc = Doctor.create(email: "doc#{i}@doc.com", password: 88888888, first_name: Faker::Name.first_name,
+  doc = Doctor.create(email: "doc#{i}@doc.com", password: 888888, first_name: Faker::Name.first_name,
                       last_name: Faker::Name.last_name, about: short_text, photo: doc_pic)
   equip = Equipment.create(title: Faker::Hipster.word, body: short_text, pic: equip_pic)
+  problem = Problem.create(title: Faker::Hipster.word)
   News.create(title: "News#{i}", body: short_text, pic: news_pic)
   Note.create(title: "Note#{i}", body: short_text, doctor_id: Doctor.last.id, equipment_id: Equipment.last.id,
               patient_id: Patient.first.id, speciality_id: spec.id)
+  patient = Patient.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, photo: patient_pic,
+                           work_position: Faker::Hipster.word)
 
+  patient.problems << problem
   doc.specialities << spec
   equip.doctors << doc
 end

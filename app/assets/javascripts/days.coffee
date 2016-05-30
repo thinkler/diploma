@@ -10,6 +10,7 @@ $ ->
 
 $(document).on('click', '.time .btn', () ->
   time = $(this).attr("id")
-  id = $('h1.center').attr('id')
-  $.get('/doctor/days/change_time/delete/' + id + '/' + time)
+  id = $(this).attr('day_id')
+  if (confirm("Вы уверены?"))
+    $.get('/doctor/days/change_time/delete/' + id + '/' + time)
 )

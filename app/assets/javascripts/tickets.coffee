@@ -27,6 +27,9 @@ $ ->
     doc_id = $(this).attr("doc_id") + '/'
     equip_id = $(this).attr("equip_id") + '/'
     spec_id = $(this).attr("spec_id") + '/'
+    console.log(equip_id)
+    if equip_id == "/"
+      equip_id = "null/"
     $.get('/patient/find_day/' + doc_id + equip_id + spec_id + date)
   )
 

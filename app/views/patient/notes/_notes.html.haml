@@ -9,13 +9,15 @@
         = n.title
       %p
         = n.body
-      .col-xs-2
-        Доктор:
-        = link_to "#{n.doctor.last_name} ", doctors_path(q: {last_name_eq: n.doctor.last_name})
+      - if n.doctor
+        .col-xs-2
+          Доктор:
+          = link_to "#{n.doctor.last_name} ", doctors_path(q: {last_name_eq: n.doctor.last_name})
 
-      .col-xs-2
-        Специальность:
-        = "#{n.speciality.title} "
+      - if n.speciality
+        .col-xs-2
+          Специальность:
+          = "#{n.speciality.title} "
 
       - if n.equipment
         .col-xs-2
