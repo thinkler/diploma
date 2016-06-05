@@ -1,35 +1,46 @@
-.container
-  %h1.center Посещения
+%h1.center Посещения
 
-  .col-xs-2.well.well-sm
-    =link_to "Прошлые", doctor_tickets_path(time: 'past')
-    |
-    =link_to "Будущие", doctor_tickets_path
+.col-xs-2.col-xs-offset-2
+  .thumbnail
+    %h3.center Поиск талона
+    = search_form_for [:doctor, @q] do |f|
+      = f.label "Фамилия пациента"
+      = f.search_field :patient_first_name_cont, class: 'form-control'
 
-  .col-xs-12
-    - @tickets.each do |t|
-      .col-xs-3
-        .thumbnail
-          Время:
-          = t.time
-          %br/
-          Дата:
-          = t.date.strftime("%d.%m.%y") if t.date
-          %br/
-          Пациент:
-          = link_to t.doctor.first_name + " " + t.doctor.last_name, doctors_path(q: {last_name_eq: t.doctor.last_name})
-          - if t.equipment
-            %br/
-            Оборудование:
-            = t.equipment.title
-          %br/
-          Специальность:
-          = t.speciality.title
-          %br/
-          = link_to "Отменить", "", class: 'btn btn-default'
-          = link_to "Перенести", "", class: 'btn btn-default'
+      = f.submit "Поиск", class: 'btn btn-success'
+
+    = link_to 'Сбросить', doctor_tickets_path, class: 'btn btn-default'
 
 
-  .col-xs-offset-3
-    .pagination
-      = paginate @tickets
+.col-xs-2.well.well-sm
+  =link_to "Прошлые", doctor_tickets_path(time: 'past')
+  |
+  =link_to "Будущие", doctor_tickets_path
+
+.col-xs-8
+  - @tickets.each do |t|
+    .col-xs-3
+      .thumbnail
+        %b Время:
+        = t.time
+        %br/
+        %b Дата:
+        = t.date.strftime("%d.%m.%y") if t.date
+        %br/
+        %b Пациент:
+        = link_to t.patient.first_name + " " + t.patient.last_name, doctor_patient_path(t.patient.id)
+        - if t.equipment
+          %br/
+          %b Оборудование:
+          = t.equipment.title
+        %br/
+        %b Специальность:
+        = t.speciality.title
+        %br/
+        = link_to "Отменить", doctor_ticket_path(t), method: :delete, class: 'btn btn-default', data: { confirm: "Вы уверены" }
+        = link_to "Перенести", "", class: 'btn btn-default'
+
+
+.col-xs-offset-3
+  .pagination
+    = paginate @tickets

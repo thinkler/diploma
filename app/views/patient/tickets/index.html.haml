@@ -27,7 +27,8 @@
           %br/
           Специальность:
           = link_to t.speciality.title, doctors_path(q: {specialities_title_eq: t.speciality.title})
-          = link_to "Отменить", patient_ticket_path(t), method: :delete, class: "btn btn-default btn-sm"
+          - unless params[:time]
+            = link_to "Отменить", patient_ticket_path(t), method: :delete, class: "btn btn-default btn-sm"
 
 
   .col-xs-offset-3

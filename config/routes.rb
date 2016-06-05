@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
   get 'patient/personal_info', to: 'patients#personal_info', as: 'patient_info'
   get 'patient/charts', to: 'patients#charts', as: 'patient_charts'
+  get 'doctor/charts', to: 'doctors#charts', as: 'doctor_charts'
 
   get '/index/role_selection/:role', to: 'index#role_selection'
   post '/patients', to: 'patients#sign_in', as: 'patient_sign_in'

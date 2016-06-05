@@ -6,12 +6,14 @@
     = image_tag @doctor.photo.url, size: "290x300"
   .col-xs-4.col-xs-offset-1
     %h3
-      Имя:
+      %b Имя:
       = @doctor.first_name
     %h3
-      Фамилия:
+      %b Фамилия:
       = @doctor.last_name
     %h3
-      Специальности:
+      %b Специальности:
       = to_string(@doctor.specialities)
-
+    %h3
+      %b Оборудование:
+      = to_string(@doctor.equipments)

@@ -1,0 +1,3 @@
+.container
+  %h1.center Частые времена приемов
+  = line_chart current_doctor.patients.group(:first_name).count

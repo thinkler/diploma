@@ -35,7 +35,7 @@ class Doctor::DaysController < ApplicationController
   def change_time
     @day = Day.find(params[:id])
     @day.times["#{params[:time]}"] = false if params[:type] == 'add'
-    @day.times.delete(params[:time]) if params[:type] == 'delete'
+    @day.delete_time(params[:time]) if params[:type] == 'delete'
     @day.save
     @times = @day.times
     respond_to do |format|
@@ -59,11 +59,11 @@ class Doctor::DaysController < ApplicationController
   end
 
   def past_days
-    current_doctor.days.ransack(date_lt: Time.now).result.page(params[:page]).per(10)
+    current_doctor.days.ransack(date_lt: Time.now).result.order(:date).page(params[:page]).per(10)
   end
 
   def future_days
-    current_doctor.days.ransack(date_gteq: Time.now).result.page(params[:page]).per(10)
+    current_doctor.days.ransack(date_gteq: Time.now).result.order(:date).page(params[:page]).per(10)
   end
 
 end

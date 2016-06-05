@@ -5,4 +5,7 @@ class DoctorsController < ApplicationController
     @doctors = @q.result.page(params[:page]).per(5)
   end
 
+  def charts
+  end
+
 end

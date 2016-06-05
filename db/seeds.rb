@@ -6,7 +6,6 @@ Patient.delete_all
 Speciality.delete_all
 News.delete_all
 
-
 lond_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eros nisl, aliquam ut elementum a, volutpat sed ipsum.
 Mauris vel consequat justo, at pellentesque justo. Duis finibus, leo eu pharetra viverra,
 lorem ex egestas quam, non rhoncus dui tortor ac risus. Fusce blandit luctus diam at venenatis.
@@ -23,7 +22,6 @@ Vestibulum arcu nulla, elementum vel diam a, malesuada sodales purus. Morbi dign
  In eget sem ligula. Quisque eget ornare nulla. Morbi ultricies, libero quis sodales ultrices, neque eros efficitur lectus, eget iaculis
  urna lectus ut risus. Mauris fermentum leo nisl, quis faucibus orci convallis in. Ut pretium diam ultrices libero volutpat rutrum.
  Quisque faucibus risus quis nisl sagittis aliquet."
-
 
 short_text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eros nisl, aliquam ut elementum a, volutpat sed ipsum.
 Mauris vel consequat justo, at pellentesque justo. Duis finibus, leo eu pharetra viverra,
@@ -42,7 +40,7 @@ Info.create(about: lond_text)
 
 20.times do |i|
   spec = Speciality.create(title: Faker::Hipster.word)
-  doc = Doctor.create(email: "doc#{i}@doc.com", password: 888888, first_name: Faker::Name.first_name,
+  doc = Doctor.create(email: "doc#{i}@doc.com", password: 8888888, first_name: Faker::Name.first_name,
                       last_name: Faker::Name.last_name, about: short_text, photo: doc_pic)
   equip = Equipment.create(title: Faker::Hipster.word, body: short_text, pic: equip_pic)
   problem = Problem.create(title: Faker::Hipster.word)

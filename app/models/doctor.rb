@@ -13,6 +13,7 @@ class Doctor < ActiveRecord::Base
   has_many :accesories
   has_many :specialities, through: :accesories
   has_many :notes
+  has_many :patients, through: :tickets
   has_many :tickets
   has_many :days
 

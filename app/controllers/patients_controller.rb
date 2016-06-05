@@ -16,7 +16,6 @@ class PatientsController < ApplicationController
   end
 
   def charts
-
   end
 
   private

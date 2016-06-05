@@ -1,4 +1,9 @@
 - @times.each do |k, v|
-  .time.thumbnail.col-xs-2
-    = k
-    .btn.btn-sm{id: k, day_id: @day.id} x
+  - if v == "true"
+    .time.red.thumbnail.col-xs-2
+      = link_to k, doctor_tickets_path(q: { time_eq: k })
+      .btn.btn-sm{id: k, day_id: @day.id} x
+  - else
+    .time.thumbnail.col-xs-2
+      = k
+      .btn.btn-sm{id: k, day_id: @day.id} x
