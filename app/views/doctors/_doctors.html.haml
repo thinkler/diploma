@@ -20,11 +20,6 @@
           .panel-body
             - doc.equipments.each do |eq|
               = link_to eq.title, equipment_index_path(q: {title_eq: eq.title})
-      .col-xs-2
-        .panel.panel-default
-          .panel-heading Диплом:
-          .panel-body
-
 
 .col-xs-offset-3
   .pagination

@@ -12,23 +12,27 @@
     - @tickets.each do |t|
       .col-xs-3
         .thumbnail
-          Время:
+          %b Время:
           = t.time
           %br/
-          Дата:
+          %b Дата:
           = t.date.strftime("%d.%m.%y") if t.date
           %br/
-          Доктор:
+          %b Доктор:
           = link_to t.doctor.first_name + " " + t.doctor.last_name, doctors_path(q: {last_name_eq: t.doctor.last_name})
+          %br/
+          %b Кабинет:
+          = t.cabinet
           - if t.equipment
             %br/
-            Оборудование:
+            %b Оборудование:
             = link_to t.equipment.title, equipment_index_path(q: {title_eq: t.equipment.title})
           %br/
-          Специальность:
+          %b Специальность:
           = link_to t.speciality.title, doctors_path(q: {specialities_title_eq: t.speciality.title})
-          - unless params[:time]
-            = link_to "Отменить", patient_ticket_path(t), method: :delete, class: "btn btn-default btn-sm"
+          %br/
+          = link_to "Отменить", patient_ticket_path(t), method: :delete, class: "btn btn-default btn-sm"
+          = link_to "Скачать", patient_pdf_path(t.id, format: :pdf), target: "_blank", class: "btn btn-default btn-sm"
 
 
   .col-xs-offset-3

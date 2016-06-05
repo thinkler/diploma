@@ -1,0 +1,18 @@
+%b Time:
+= @ticket.time
+%br/
+%b Date:
+= @ticket.date.strftime("%d.%m.%y") if @ticket.date
+%br/
+%b Doctor:
+= @ticket.doctor.first_name + " " + @ticket.doctor.last_name
+%br/
+%b Cabinet:
+= @ticket.cabinet
+- if @ticket.equipment
+  %br/
+  %b Equipment:
+  = @ticket.equipment.title
+%br/
+%b Speciality:
+= @ticket.speciality.title

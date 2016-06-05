@@ -11,6 +11,11 @@
 
     = link_to 'Сбросить', doctor_tickets_path, class: 'btn btn-default'
 
+  %h3 Уведомления
+  - current_doctor.statuses.order(id: :desc).limit(8).each do |s|
+    .thumbnail
+      = s.body
+
 
 .col-xs-2.well.well-sm
   =link_to "Прошлые", doctor_tickets_path(time: 'past')

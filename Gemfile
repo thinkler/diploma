@@ -24,6 +24,8 @@ gem 'ransack'
 gem "chartkick"
 gem 'groupdate'
 gem 'faker'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

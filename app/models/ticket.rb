@@ -11,4 +11,5 @@ class Ticket < ActiveRecord::Base
       model.tickets.ransack(date_gteq: Time.now).result
     end
   end
+
 end

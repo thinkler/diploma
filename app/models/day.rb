@@ -14,9 +14,7 @@ class Day < ActiveRecord::Base
   end
 
   def delete_time(time)
-    byebug
     times.delete(time)
-    Ticket.find_by(date: date, time: time).delete
   end
 
 end

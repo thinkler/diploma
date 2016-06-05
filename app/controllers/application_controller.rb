@@ -16,4 +16,12 @@ class ApplicationController < ActionController::Base
     Patient.find(session[:patient]["id"])
   end
 
+  def add_status(text, patient, id, reason = "")
+    if patient
+      Status.create(body: text, patient_id: id, reason: reason)
+    else
+      Status.create(body: text, doctor_id: id, reason: reason)
+    end
+  end
+
 end

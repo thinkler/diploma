@@ -6,3 +6,9 @@
     .list-group-item= link_to "Посещения", patient_tickets_path
     .list-group-item= link_to "Статистика", patient_charts_path
     .list-group-item= link_to "Личная ифнормация", patient_info_path
+
+  %h1 Уведомления
+
+  - current_patient.statuses.order(id: :desc).limit(8).each do |s|
+    .thumbnail
+      = s.body

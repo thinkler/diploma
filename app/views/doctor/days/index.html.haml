@@ -20,6 +20,9 @@
           %tr
             %td
               = d.date.strftime("%d.%m.%y") if d.date
+              %br/
+              %b Кабиент:
+              = d.cabinet
               = link_to "Удалить", doctor_day_path(d), method: :delete, data: { confirm: "Вы уверены?" }
             %td
               #times{class: d.id}

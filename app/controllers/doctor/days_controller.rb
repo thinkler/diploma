@@ -7,6 +7,7 @@ class Doctor::DaysController < ApplicationController
   def update
     @day = Day.find(params[:id])
     @day.date = params[:date]
+    @day.cabinet = params[:cabinet]
     @day.doctor_id = current_doctor.id
     @day.notes = params[:notes]
     @day.save
@@ -23,7 +24,10 @@ class Doctor::DaysController < ApplicationController
   end
 
   def destroy
-    Day.find(params[:id]).delete
+    day = Day.find(params[:id])
+    delete_tickets(day.date)
+    day.delete
+    add_status("Вы отменили день #{day.date.strftime('%d-%m-%y')}", false, current_doctor.id)
     redirect_to doctor_days_path
   end
 
@@ -35,7 +39,14 @@ class Doctor::DaysController < ApplicationController
   def change_time
     @day = Day.find(params[:id])
     @day.times["#{params[:time]}"] = false if params[:type] == 'add'
-    @day.delete_time(params[:time]) if params[:type] == 'delete'
+    if params[:type] == 'delete'
+      @day.delete_time(params[:time])
+      ticket = Ticket.find_by(date: @day.date, time: params[:time])
+      add_status("Время #{@day.date.strftime('%d-%m-%y')}/##{params[:time]} было отменено доктором", true, ticket.patient_id) if ticket
+      byebug
+      add_status("Вы отменили время #{@day.date.strftime('%d-%m-%y')}/#{params[:time]}", false, current_doctor.id)
+      ticket.delete if ticket
+    end
     @day.save
     @times = @day.times
     respond_to do |format|
@@ -46,7 +57,7 @@ class Doctor::DaysController < ApplicationController
   private
 
   def permit_params
-    params.require(:day).permit(:date, :notes)
+    params.require(:day).permit(:date, :notes, :cabinet)
   end
 
   def default_times
@@ -64,6 +75,15 @@ class Doctor::DaysController < ApplicationController
 
   def future_days
     current_doctor.days.ransack(date_gteq: Time.now).result.order(:date).page(params[:page]).per(10)
+  end
+
+
+  def delete_tickets(date)
+    tickets = Ticket.where(date: date)
+    tickets.each do |t|
+      t.delete
+      add_status("Приемный день #{date.strftime('%d-%m-%y')} был отменен доктором", true, t.patient_id)
+    end
   end
 
 end

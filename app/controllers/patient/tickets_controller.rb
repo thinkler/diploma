@@ -31,13 +31,24 @@ class Patient::TicketsController < ApplicationController
     end
   end
 
+  def to_pdf
+    @ticket = Ticket.find(params[:id])
+    respond_to do |format|
+      format.pdf do
+        render pdf: "Ticket#{@ticket.id}", template: 'ticket', layout: 'pdf'   # Excluding ".pdf" extension.
+      end
+    end
+  end
+
   def create
     day = Day.find(params[:day])
     day.times[params[:time]] = true
     day.save
     Ticket.create(patient_id: current_patient.id, equipment_id: params[:equip],
                   doctor_id: params[:doc], speciality_id: params[:spec],
-                  time: params[:time], date: day.date)
+                  time: params[:time], date: day.date, cabinet: day.cabinet)
+    add_status("Вы записались на прием. Дата/время: #{day.date.strftime('%d-%m-%y')}/#{params[:time]}", true, current_patient.id)
+    add_status("Новая запись. Дата/время: #{day.date.strftime('%d-%m-%y')}/#{params[:time]}", false, params[:doc])
     redirect_to patient_tickets_path
   end
 
@@ -49,6 +60,8 @@ class Patient::TicketsController < ApplicationController
     ticket = Ticket.find(params[:id])
     Day.free_day(ticket.date, ticket.time)
     ticket.destroy
+    add_status("Вы отменили прием на #{ticket.date.strftime('%d-%m-%y')}/#{ticket.time}", true, current_patient.id)
+    add_status("Прием на #{ticket.date.strftime('%d-%m-%y')}/#{ticket.time} отменен пациентом", false, ticket.doctor_id)
     redirect_to patient_tickets_path
   end
 

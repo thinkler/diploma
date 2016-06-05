@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     get '/search/:klass/:q', to: 'tickets#search'
     get '/find_day/:doc_id/:equip_id/:spec_id/:date', to: 'tickets#find_day'
     post '/tickets/:id', to: 'tickets#create'
+    get '/ticket_pdf/:id', to: 'tickets#to_pdf', as: 'pdf'
   end
 
   namespace :doctor do
