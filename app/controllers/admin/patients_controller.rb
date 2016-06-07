@@ -51,7 +51,7 @@ class Admin::PatientsController < ApplicationController
 
   def add_problems(specs, patient)
     patient.problems.delete_all
-    specs.split(" ").each do |pr|
+    specs.split(",").each do |pr|
       problem = Problem.find_or_initialize_by(title: pr)
       problem.patients << patient
       problem.save

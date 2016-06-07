@@ -6,12 +6,12 @@
   .col-xs-4
     %h4 Доктор
     - unless @doctor || @doctors.length == 1
-      .col-xs-6= text_field_tag 'search', nil, id: 'doc-search', class: 'form-control'
+      .col-xs-6= text_field_tag 'search', nil, id: 'doc-search', placeholder: 'Фамилия доктора', class: 'form-control'
       %br/
       %br/
     - if @doctor || @doctors.length == 1
       - doc = @doctor || @doctors.last
-      %h1= doc.first_name
+      %h1= doc.last_name
     - else
       #doctors= render partial: 'doctors'
 
@@ -19,7 +19,7 @@
     .col-xs-4
       %h4 Оборудование
       - unless @equip || @equipment.length == 1
-        .col-xs-6= text_field_tag 'search', nil, id: 'eq-search', class: 'form-control'
+        .col-xs-6= text_field_tag 'search', nil, id: 'eq-search', placeholder: 'Название', class: 'form-control'
         %br/
         %br/
       - if @equip || @equipment.length == 1
@@ -31,7 +31,7 @@
   .col-xs-4
     %h4 Специальность
     - unless @spec || @specialities.length == 1
-      .col-xs-6= text_field_tag 'search', nil, id: 'spec-search', class: 'form-control'
+      .col-xs-6= text_field_tag 'search', nil, id: 'spec-search', placeholder: 'Название', class: 'form-control'
       %br/
       %br/
     - if @spec || @specialities.length == 1

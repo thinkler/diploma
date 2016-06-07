@@ -15,7 +15,7 @@ class Admin::DoctorsController < ApplicationController
   def create
     @doctor = Doctor.new(doctor_params)
     if @doctor.save
-      add_relations(params[:specialities], params[:equipment],@doctor)
+      add_relations(params[:specialities], params[:equipment], @doctor)
       redirect_to admin_doctors_path, notice: 'doctor was successfully created.'
     else
       render :new
@@ -49,13 +49,13 @@ class Admin::DoctorsController < ApplicationController
   def add_relations(specs, equip, doctor)
     doctor.specialities.delete_all
     doctor.equipments.delete_all
-    specs.split(" ").each do |sp|
+    specs.split(",").each do |sp|
       speciality = Speciality.find_or_initialize_by(title: sp)
       speciality.doctors << doctor
       speciality.save
     end
-    equip.split(" ").each do |eq|
-      equipment = Equipment.find_by(title: eq)
+    equip.split(",").each do |eq|
+      equipment = Equipment.find_or_initialize_by(title: eq)
       if equipment
         doctor.equipments << equipment
       end

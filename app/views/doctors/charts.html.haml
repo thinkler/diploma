@@ -1,3 +1,9 @@
 .container
   %h1.center Частые времена приемов
-  = line_chart current_doctor.patients.group(:first_name).count
+  = pie_chart current_doctor.tickets.limit(50).group(:time).count
+
+  %h1.center Частые специальности
+  = bar_chart current_doctor.problems.group(:title).count
+
+  %h1.center Частота посещений
+  = line_chart current_doctor.tickets.group_by_month(:date).count

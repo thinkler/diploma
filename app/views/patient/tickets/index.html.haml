@@ -8,6 +8,10 @@
     |
     =link_to "Будущие", patient_tickets_path
 
+  - if @tickets.empty?
+    .col-xs-12
+      %h2 Посещений нет
+
   .col-xs-12
     - @tickets.each do |t|
       .col-xs-3
@@ -23,10 +27,12 @@
           %br/
           %b Кабинет:
           = t.cabinet
+          %br/
+          %b Оборудование:
           - if t.equipment
-            %br/
-            %b Оборудование:
             = link_to t.equipment.title, equipment_index_path(q: {title_eq: t.equipment.title})
+          - else
+            Не указано
           %br/
           %b Специальность:
           = link_to t.speciality.title, doctors_path(q: {specialities_title_eq: t.speciality.title})

@@ -1,3 +1,5 @@
+%h1 Талон на прием медико-санитарного цеха
+
 %b Time:
 = @ticket.time
 %br/
@@ -16,3 +18,9 @@
 %br/
 %b Speciality:
 = @ticket.speciality.title
+
+%br/
+%br/
+
+Талон утвержден заведующим медико-санитарного цеха:
+= wicked_pdf_image_tag 'rosp.jpg', size: '200x100'

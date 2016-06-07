@@ -11,7 +11,7 @@ class Patient::TicketsController < ApplicationController
     if params[:q] == 'all'
       set_defaults_collections
     else
-      @doctors = doctors.ransack(first_name_cont: params[:q]).result.limit(5) if params[:klass] == 'doctors'
+      @doctors = doctors.ransack(last_name_cont: params[:q]).result.limit(5) if params[:klass] == 'doctors'
       @equipment = equipment.ransack(title_cont: params[:q]).result.limit(5) if params[:klass] == 'equipment'
       @specialities = specialities.ransack(title_cont: params[:q]).result.limit(5) if params[:klass] == 'specialities'
     end
@@ -26,8 +26,7 @@ class Patient::TicketsController < ApplicationController
     @equip = Equipment.find(params[:equip_id]) unless params[:equip_id] == "null"
     @day = @doc.days.find_by(date: params[:date]) unless params[:date] == 'null'
     respond_to do |format|
-      format.js { render partial: 'day_result' } if @day
-      format.js { render nothing: true }
+      format.js { render partial: 'day_result' }
     end
   end
 
@@ -35,7 +34,7 @@ class Patient::TicketsController < ApplicationController
     @ticket = Ticket.find(params[:id])
     respond_to do |format|
       format.pdf do
-        render pdf: "Ticket#{@ticket.id}", template: 'ticket', layout: 'pdf'   # Excluding ".pdf" extension.
+        render pdf: "Ticket#{@ticket.id}", template: 'ticket', layout: 'pdf_layout.html.erb'   # Excluding ".pdf" extension.
       end
     end
   end
@@ -80,9 +79,9 @@ class Patient::TicketsController < ApplicationController
   end
 
   def set_defaults_collections
-    @doctors = Doctor.ransack(specialities_id_eq: params[:spec_id], equipments_id_eq: params[:equip_id]).result.limit(5)
-    @equipment = Equipment.ransack(doctors_id_eq: params[:doc_id], doctors_specialities_id_eq: params[:spec_id]).result.limit(5)
-    @specialities = Speciality.ransack(doctors_id_eq: params[:doc_id], doctors_equipments_id_eq: params[:equip_id]).result.limit(5)
+    @doctors = Doctor.ransack(specialities_id_eq: params[:spec_id], equipments_id_eq: params[:equip_id]).result.order('id DESC').limit(5)
+    @equipment = Equipment.ransack(doctors_id_eq: params[:doc_id], doctors_specialities_id_eq: params[:spec_id]).result.order('id DESC').limit(5)
+    @specialities = Speciality.ransack(doctors_id_eq: params[:doc_id], doctors_equipments_id_eq: params[:equip_id]).result.order('id DESC').limit(5)
   end
 
   def set_current_items

@@ -10,8 +10,12 @@ class Doctor::DaysController < ApplicationController
     @day.cabinet = params[:cabinet]
     @day.doctor_id = current_doctor.id
     @day.notes = params[:notes]
-    @day.save
-    redirect_to doctor_days_path
+    if params[:date].empty? || params[:cabinet].empty?
+      redirect_to :back, alert: "Заполните дату и кабинет"
+    else
+      @day.save
+      redirect_to doctor_days_path
+    end
   end
 
   def index
@@ -43,7 +47,6 @@ class Doctor::DaysController < ApplicationController
       @day.delete_time(params[:time])
       ticket = Ticket.find_by(date: @day.date, time: params[:time])
       add_status("Время #{@day.date.strftime('%d-%m-%y')}/##{params[:time]} было отменено доктором", true, ticket.patient_id) if ticket
-      byebug
       add_status("Вы отменили время #{@day.date.strftime('%d-%m-%y')}/#{params[:time]}", false, current_doctor.id)
       ticket.delete if ticket
     end

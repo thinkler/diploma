@@ -1,3 +1,5 @@
 .list-group
+  - if @doctors.empty?
+    %h2 Доктора не найдены
   - @doctors.each do |doc|
-    = link_to "#{doc.first_name}", url_make_helper(@url, 'doc_id', doc.id), class: "list-group-item"
+    = link_to "#{doc.last_name}", url_make_helper(@url, 'doc_id', doc.id), class: "list-group-item"

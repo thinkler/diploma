@@ -2,6 +2,9 @@
   .pagination
     = paginate @equipment
 
+  - if @equipment.empty?
+    %h2 Оборудование не найдено
+
 - @equipment.each do |eq|
   .thumbnail
     .caption

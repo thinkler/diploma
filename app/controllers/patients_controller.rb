@@ -2,8 +2,12 @@ class PatientsController < ApplicationController
 
   def sign_in
     patient = Patient.find_by(permit_params)
-    session[:patient] = patient
-    redirect_to root_path, notice: "#{patient.first_name}, вы успешно вошли"
+    if patient
+      session[:patient] = patient
+      redirect_to root_path, notice: "#{patient.first_name}, вы успешно вошли"
+    else
+      redirect_to :back, alert: "Введите корректные данные"
+    end
   end
 
   def sign_out

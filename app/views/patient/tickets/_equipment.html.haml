@@ -1,3 +1,5 @@
 .list-group
+  - if @equipment.empty?
+    %h2 Оборудование не найдено
   - @equipment.each do |eq|
     = link_to "#{eq.title}", url_make_helper(@url, 'equip_id', eq.id), class: "list-group-item"

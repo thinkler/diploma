@@ -1,5 +1,9 @@
-
 .col-xs-12.container.times
-  - free_time(@day.times).each do |k, v|
-    - equip_id = @equip ? @equip.id : ""
-    = link_to "#{k}", patient_ticket_path(id: 0, doc: @doc.id, equip: equip_id, spec: @spec.id, time: k, day: @day.id), method: :post, class: "thumbnail col-xs-2"
+  - if @day == nil
+    %h2 Нет приемов на данный день
+  - elsif free_time(@day.times).empty?
+    %h2 Все приемы заняты
+  - else
+    - free_time(@day.times).each do |k, v|
+      - equip_id = @equip ? @equip.id : ""
+      = link_to "#{k}", patient_ticket_path(id: 0, doc: @doc.id, equip: equip_id, spec: @spec.id, time: k, day: @day.id), method: :post, class: "thumbnail col-xs-2"

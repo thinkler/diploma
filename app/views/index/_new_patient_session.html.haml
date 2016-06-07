@@ -1,14 +1,14 @@
 = form_for(Patient.new, as: :patient, url: patient_sign_in_path) do |f|
   .field
-    = f.label :first_name
+    = f.label "Имя"
     %br/
     = f.text_field :first_name, autofocus: true, class: 'form-control'
   .field
-    = f.label :last_name
+    = f.label "Фамилия"
     %br/
     = f.text_field :last_name, autofocus: true, class: 'form-control'
   .field
-    = f.label :personal_number
+    = f.label "Личный номер"
     %br/
     = f.number_field :personal_number, autofocus: true, class: 'form-control'
   %br

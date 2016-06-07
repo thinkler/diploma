@@ -14,6 +14,7 @@ class Doctor < ActiveRecord::Base
   has_many :specialities, through: :accesories
   has_many :notes
   has_many :patients, through: :tickets
+  has_many :problems, through: :patients
   has_many :tickets
   has_many :days
   has_many :statuses

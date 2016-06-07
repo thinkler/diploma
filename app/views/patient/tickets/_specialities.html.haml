@@ -1,3 +1,5 @@
 .list-group
+  - if @specialities.empty?
+    %h2 Специальность не найдена
   - @specialities.each do |spec|
     = link_to "#{spec.title}", url_make_helper(@url, 'spec_id', spec.id), class: "list-group-item"

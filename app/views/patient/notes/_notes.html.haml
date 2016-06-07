@@ -2,6 +2,9 @@
   .pagination
     = paginate @notes
 
+- if @notes.empty?
+  %h2 Записи отсутствуют
+
 - @notes.each do |n|
   .thumbnail.container.col-xs-12
     .caption
@@ -12,7 +15,10 @@
       - if n.doctor
         .col-xs-2
           Доктор:
-          = link_to "#{n.doctor.last_name} ", doctors_path(q: {last_name_eq: n.doctor.last_name})
+          - unless current_doctor
+            = link_to "#{n.doctor.last_name} ", doctors_path(q: {last_name_eq: n.doctor.last_name})
+          - else
+            = "#{n.doctor.last_name}"
 
       - if n.speciality
         .col-xs-2
@@ -22,7 +28,10 @@
       - if n.equipment
         .col-xs-2
           Оборудование:
-          = link_to "#{n.equipment.title} ", equipment_index_path(q: {last_name_eq: n.doctor.last_name})
+          - unless current_doctor
+            = link_to "#{n.equipment.title} ", equipment_index_path(q: {last_name_eq: n.doctor.last_name})
+          - else
+            = "#{n.equipment.title}"
 
       - unless n.doc.url.include? "miss"
         .col-xs-2

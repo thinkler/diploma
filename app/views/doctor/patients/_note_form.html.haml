@@ -5,12 +5,12 @@
     = f.text_area  :body
 
     - unless current_doctor.specialities.length == 1
-      = f.select :speciality_id
+      = f.collection_select :speciality_id, current_doctor.specialities, :id, :title
     - else
       = f.hidden_field :speciality_id, value: current_doctor.specialities.first.id
 
-    - unless current_doctor.specialities.length == 1 || current_doctor.specialities.length.empty?
-      = f.select :equipment_id
+    - unless current_doctor.specialities.length == 1
+      = f.collection_select :equipment_id, current_doctor.equipments, :id, :title
     - else
       = f.hidden_field :equipment_id, value: current_doctor.equipments.first.id
 

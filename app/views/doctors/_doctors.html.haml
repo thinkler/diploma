@@ -2,6 +2,9 @@
   .pagination
     = paginate @doctors
 
+  -if @doctors.empty?
+    %h2 Доктора не найдены
+
 - @doctors.each do |doc|
   .thumbnail.container.col-xs-12
     .caption
@@ -15,11 +18,12 @@
           .panel-heading Специальности:
           .panel-body= to_string(doc.specialities)
       .col-xs-3
-        .panel.panel-default
-          .panel-heading Оборудование:
-          .panel-body
-            - doc.equipments.each do |eq|
-              = link_to eq.title, equipment_index_path(q: {title_eq: eq.title})
+        - unless doc.equipments.empty?
+          .panel.panel-default
+            .panel-heading Оборудование:
+            .panel-body
+              - doc.equipments.each do |eq|
+                = link_to eq.title, equipment_index_path(q: {title_eq: eq.title})
 
 .col-xs-offset-3
   .pagination
